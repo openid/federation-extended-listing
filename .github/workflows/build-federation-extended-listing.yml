@@ -54,10 +54,10 @@ jobs:
 
       - name: Run the build process with Docker
         run: |
-          docker run -v `pwd`:/data danielfett/markdown2rfc openid-federation-wallet-1_0.md
+          docker run -v `pwd`:/data danielfett/markdown2rfc openid-federation-extended-listing-1_0.md
       - name: rename
         run: |
-          mv ./openid-federation-wallet*.html ./html/$BRANCH_NAME.html
+          mv ./openid-federation-extended-listing*.html ./html/$BRANCH_NAME.html
 
       - name: Deploy to GitHub Pages
         if: success()
