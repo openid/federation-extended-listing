@@ -15,32 +15,32 @@ initials="G."
 surname="De Marco"
 fullname="Giuseppe De Marco"
 organization="Dipartimento per la trasformazione digitale"
-[author.address]
-email = "gi.demarco@innovazione.gov.it"
+    [author.address]
+    email = "gi.demarco@innovazione.gov.it"
 
 [[author]]
 initials="M."
 surname="Fraser"
 fullname="Michael Fraser"
 organization="Raidiam"
-[author.address]
-email = "michael.fraser@raidiam.com"
+    [author.address]
+    email = "michael.fraser@raidiam.com"
 
 [[author]]
 initials="L."
 surname="Jaromin"
 fullname="Lukasz Jaromin"
 organization="Raidiam"
-[author.address]
-email = "lukasz.jaromin@raidiam.com"
+    [author.address]
+    email = "lukasz.jaromin@raidiam.com"
 
 [[author]]
 initials="M.B."
 surname="Jones"
 fullname="Michael B. Jones"
 organization="Self-Issued Consulting"
-[author.address]
-email = "michael_b_jones@hotmail.com"
+    [author.address]
+    email = "michael_b_jones@hotmail.com"
 
 %%%
 
@@ -50,15 +50,15 @@ This specification acts as an extension to the [@OpenID.Federation]. It outlines
 
 {mainmatter}
 
-## Introduction
+# Introduction
 
 The extending listing endpoint has been created to address two outstanding issues identified in [@OpenID.Federation].
 
-#### Response Size
+## Response Size
 
-The standard `federation_list_endpoint` has limitations when entities are able to issue entity statements for an exceptionally large number of entities. Limitations can be encountered both when attempting to process recieving such a large response as well as more technical limitations such as response sizes of infrastructure. Pagination has been proposed as a solution for this.
+The standard `federation_list_endpoint` has limitations when entities are able to issue entity statements for an exceptionally large number of entities. Limitations can be encountered both when attempting to process receiving such a large response as well as more technical limitations such as response sizes of infrastructure. Pagination has been proposed as a solution for this.
 
-#### Bulk Retrieval
+## Bulk Retrieval
 
 For certain usecases, such as mass registration, consumers may encounter challenges when attempting to retrieve information on multiple entities. A flow with the standard `federation_list_endpoint` may involve a request to the list endpoint followed by a series of subsequent requests to retrieve an entity statement for each listed entity resulting in an N+1 operation. The extended listing endpoint seeks to solve this by providing a mechanism to include additional metadata for entities in the provided list.
 
@@ -66,13 +66,11 @@ For certain usecases, such as mass registration, consumers may encounter challen
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 [@!RFC2119] [@!RFC8174] when, and only when, they appear in all capitals, as shown here.
 
-## Terminology
+# Terminology
 
 This specification uses the terms "Entity Identifier", "Subordinate Statement", "Trust Anchor", "Intermediate", "Federation Entity", "Entity", "federation_list_endpoint", and "Immediate Subordinate Entity" as defined in [@OpenID.Federation], "NumericDate" as defined in [@!RFC7591].
 
-
-
-## Extended Subordinate Listing Endpoint
+# Extended Subordinate Listing Endpoint
 
 The extended subordinate listing endpoint is exposed by Federation Entities acting as a Trust Anchor or Intermediate. The endpoint lists the Immediate Subordinate Entities about which the Trust Anchor or Intermediate issues Subordinate Statements.
 
@@ -86,7 +84,7 @@ The selected pagination type offers a mix of consistency and performance charact
 
 The endpoint is accessible via the `federation_extended_list_endpoint` URL, which is published in the `federation_metadata`.
 
-### Extended Subordinate Listing Request
+## Extended Subordinate Listing Request
 
 This endpoint follows the same rules that are defined in the `federation_list_endpoint` regarding client authentication, HTTP methods used, and the way parameters are passed.
 
@@ -133,7 +131,7 @@ Host: trust-anchor.star-federation.example.net
 
 *Figure 4: Request to list all entities and only include trust marks in the response.*
 
-## Extended Subordinate Listing Response
+# Extended Subordinate Listing Response
 
 A successful response MUST use the HTTP status code 200 with the content type `application/json`. The response body is a JSON object containing data specified in the table below.
 
@@ -226,7 +224,7 @@ Content-Type: application/json
 
 *Figure 7: Example extended list endpoint response that includes entity statements and trust marks*
 
-## Federation Entity Property
+# Federation Entity Property
 
 In order for entities to advertise the new endpoint, a new property has been defined adding to the existing set of Federation Entity Metadata as defined in [@OpenID.Federation].
 
@@ -234,7 +232,7 @@ In order for entities to advertise the new endpoint, a new property has been def
 |-----------------------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | federation_extended_list_endpoint | OPTIONAL         | The extended list endpoint as described above. All constraints and restrictions on the listing of this endpoint are identical to that defined for the `federation_list_endpoint` as defined in OpenID Federation 1.0 
 
-## Examples of Handling Large Number of Immediate Subordinate Entities
+# Examples of Handling Large Number of Immediate Subordinate Entities
 
 This section contains non-normative examples that demonstrate how to use the Extended Subordinates Listing Endpoint to manage large numbers of Immediate Suboridnates.
 
