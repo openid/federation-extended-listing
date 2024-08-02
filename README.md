@@ -3,6 +3,12 @@
 This repository contains the specification for OpenID Federation Extended Subordinate Listing. 
 This specification acts as an extension to OpenID Federation 1.0 and proposes an alternative listing endpoint enabling consumers to retrieve segmented pages of data as well as bulk retrieving information.
 
+## Pages
+The hosted HTML can be viewed at
+https://michaelfraser1999.github.io/federation-extended-listing/main.html
+
+or for a branch at
+https://michaelfraser1999.github.io/federation-extended-listing/{BRANCH-NAME}.html
 
 ## Build the HTML ##
 
