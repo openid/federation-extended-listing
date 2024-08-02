@@ -1,13 +1,13 @@
 %%%
-title = "OpenID Federation Subordinate Listing"
-abbrev = "openid-federation-subordinate-listing"
+title = "OpenID Federation Extended Subordinate Listing"
+abbrev = "openid-federation-extended-listing"
 ipr = "none"
 workgroup = "OpenID Connect A/B"
 keyword = ["security", "openid"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "openid-federation-subordinate-listing-00"
+value = "openid-federation-extended-listing-00"
 status = "standard"
 
 [[author]]
