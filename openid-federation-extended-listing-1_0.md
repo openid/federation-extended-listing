@@ -232,9 +232,9 @@ In order for entities to advertise the new endpoint, a new property has been def
 |-----------------------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | federation_extended_list_endpoint | OPTIONAL         | The extended list endpoint as described above. All constraints and restrictions on the listing of this endpoint are identical to that defined for the `federation_list_endpoint` as defined in OpenID Federation 1.0 
 
-# Examples of Handling Large Number of Immediate Subordinate Entities
+# Examples
 
-This section contains non-normative examples that demonstrate how to use the Extended Subordinates Listing Endpoint to manage large numbers of Immediate Suboridnates.
+This section contains non-normative examples that demonstrate how to use the Extended Subordinates Listing Endpoint to retrieve subsets of subordinates.
 
 ```
 GET /list_extended HTTP/1.1
