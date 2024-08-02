@@ -261,7 +261,7 @@ Content-Type: application/json
 }
 ```
 
-*Figure 8: A Trust Anchor returns the results list comprising of thousand immediate entities, along with the next entity id that the next page starts with, in response to the request to list all immediate subordinates.*
+*Figure 8: A Trust Anchor returns the results list consisting of thousand immediate entities, along with the next entity id that the next page starts with, in response to the request to list all immediate subordinates.*
 
 ```
 GET /list_extended?from_entity_id=https://1000.example.net/ HTTP/1.1
