@@ -1288,7 +1288,7 @@ li > p:last-of-type:only-child {
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-federation-entity-property" class="internal xref">Federation Entity Property</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-examples-of-handling-large-" class="internal xref">Examples of Handling Large Number of Immediate Subordinate Entities</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
@@ -1682,12 +1682,12 @@ Content-Type: application/json
       </table>
 </section>
 </div>
-<div id="examples-of-handling-large-number-of-immediate-subordinate-entities">
+<div id="examples">
 <section id="section-6">
-      <h2 id="name-examples-of-handling-large-">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-examples-of-handling-large-" class="section-name selfRef">Examples of Handling Large Number of Immediate Subordinate Entities</a>
+      <h2 id="name-examples">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
       </h2>
-<p id="section-6-1">This section contains non-normative examples that demonstrate how to use the Extended Subordinates Listing Endpoint to manage large numbers of Immediate Suboridnates.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">This section contains non-normative examples that demonstrate how to use the Extended Subordinates Listing Endpoint to retrieve subsets of subordinates.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6-2">
 <pre>GET /list_extended HTTP/1.1
 
@@ -1713,7 +1713,7 @@ Content-Type: application/json
 }
 </pre><a href="#section-6-2" class="pilcrow">¶</a>
 </div>
-<p id="section-6-3"><em>Figure 8: A Trust Anchor returns the results list comprising of thousand immediate entities, along with the next entity id that the next page starts with, in response to the request to list all immediate subordinates.</em><a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-3"><em>Figure 8: A Trust Anchor returns the results list consisting of thousand immediate entities, along with the next entity id that the next page starts with, in response to the request to list all immediate subordinates.</em><a href="#section-6-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6-4">
 <pre>GET /list_extended?from_entity_id=https://1000.example.net/ HTTP/1.1
 
