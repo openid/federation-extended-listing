@@ -10,7 +10,7 @@
 <meta content="Łukasz Jaromin" name="author">
 <meta content="Michael B. Jones" name="author">
 <meta content="
-       This specification acts as an extension to the  . It defines methods to interact with a given Federation with a potentially large number of registered Entities, as well as mechanisms to retrieve multiple Entity Statements along with associated details in a single request. 
+       This specification acts as an extension to the  . It defines methods to interact with a given Federation with a potentially large number of registered Entities, as well as mechanisms to retrieve multiple Subordinate Statements along with associated details in a single request. 
     " name="description">
 <meta content="xml2rfc 3.16.0" name="generator">
 <meta content="security" name="keyword">
@@ -1248,7 +1248,7 @@ li > p:last-of-type:only-child {
 <h1 id="title">OpenID Federation Extended Subordinate Listing 1.0 - draft 01</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This specification acts as an extension to the <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>. It defines methods to interact with a given Federation with a potentially large number of registered Entities, as well as mechanisms to retrieve multiple Entity Statements along with associated details in a single request.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This specification acts as an extension to the <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>. It defines methods to interact with a given Federation with a potentially large number of registered Entities, as well as mechanisms to retrieve multiple Subordinate Statements along with associated details in a single request.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <div id="toc">
 <section id="section-toc.1">
@@ -1320,7 +1320,7 @@ li > p:last-of-type:only-child {
         <h3 id="name-response-size">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-response-size" class="section-name selfRef">Response Size</a>
         </h3>
-<p id="section-1.1-1">The standard <code>federation_list_endpoint</code> has limitations when Entities are able to issue Entity Statements for an exceptionally large number of Entities. Limitations can be encountered both when attempting to process receiving such a large response as well as more technical limitations such as response sizes of infrastructure. Pagination has been proposed as a solution for this.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">The standard <code>federation_list_endpoint</code> has limitations when Entities are able to issue Subordinate Statements for an exceptionally large number of Entities. Limitations can be encountered both when attempting to process receiving such a large response as well as more technical limitations such as response sizes of infrastructure. Pagination has been proposed as a solution for this.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="bulk-retrieval">
@@ -1328,7 +1328,7 @@ li > p:last-of-type:only-child {
         <h3 id="name-bulk-retrieval">
 <a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-bulk-retrieval" class="section-name selfRef">Bulk Retrieval</a>
         </h3>
-<p id="section-1.2-1">For certain usecases, such as mass registration, consumers may encounter challenges when attempting to retrieve information on multiple Entities. A flow with the standard <code>federation_list_endpoint</code> may involve a request to the list endpoint followed by a series of subsequent requests to retrieve an Entity Statement for each listed Entity resulting in an N+1 operation. The Federation Extended Subordinate Listing endpoint seeks to solve this by providing a mechanism to include additional metadata for Entities in the provided list.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-1">For certain usecases, such as mass registration, consumers may encounter challenges when attempting to retrieve information on multiple Entities. A flow with the standard <code>federation_list_endpoint</code> may involve a request to the list endpoint followed by a series of subsequent requests to retrieve a Subordinate Statement for each listed Entity resulting in an N+1 operation. The Federation Extended Subordinate Listing endpoint seeks to solve this by providing a mechanism to include additional metadata for Entities in the provided list.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="requirements-notation-and-conventions">
@@ -1430,9 +1430,9 @@ When present the <code>registered</code>, <code>updated</code>, <code>revoked</c
               <td class="text-left" rowspan="1" colspan="1">Array</td>
               <td class="text-left" rowspan="1" colspan="2">List of claims to be included in the response for each returned Immediate Subordinate Entity.<br>
                 <br>
- If this parameter is NOT present or it is an empty array, the Entity Statement MUST be the only claim for each Immediate Subordinate Entity<br>
+ If this parameter is NOT present or it is an empty array, the response SHOULD NOT contain any claims for a Subordinate Statement.<br>
                 <br>
-If this parameter is present and it is NOT an empty array each JSON object that represents the Immediate Subordinate Entity MUST include the requested claims for a Subordinate Entity Statement if available.<br>
+If this parameter is present and it is NOT an empty array each JSON object that represents the Immediate Subordinate Entity MUST include the requested claims for a Subordinate Statement if available.<br>
                 <br>
 Entities that expose the Federation Extended Subordinate Listing endpoint MUST support all top level statement claims defined in <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>. TBD: Support of requests for discrete Entity metadata attributes.</td>
             </tr>
@@ -1547,14 +1547,12 @@ Host: trust-anchor.star-federation.example.net
               <td class="text-left" rowspan="1" colspan="1">Entity Identifier for the subject entity of the current record.</td>
             </tr>
             <tr>
-              <td class="text-left" rowspan="1" colspan="1">entity_statement</td>
+              <td class="text-left" rowspan="1" colspan="1">subordinate_statement</td>
               <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
               <td class="text-left" rowspan="1" colspan="1">String</td>
-              <td class="text-left" rowspan="1" colspan="1">Signed entity statement for the Subordinate Entity as issued by the Entity that exposes the Federation Extended Subordinate Listing endpoint.<br>
+              <td class="text-left" rowspan="1" colspan="1">Subordinate Statement for the Immediate Subordinate Entity as issued by the Entity that exposes the Federation Extended Subordinate Listing endpoint.<br>
                 <br>
-This <code>entity_statement</code> attribute SHOULD be returned if the <code>claims</code> parameter is NOT present in the request or it is present but the array is empty.<br>
-                <br>
-This <code>entity_statement</code> attribute MUST NOT be returned if the <code>claims</code> parameter is NOT present in the request or it is present but the array is empty.</td>
+This <code>subordinate_statement</code> attribute MUST be returned if the <code>claims</code> parameter is present and contains <code>subordinate_statement</code>. It MUST NOT be returned if the <code>claims</code> parameter is present but the array does not contain <code>subordinate_statement</code>.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">trust_marks, metadata, and/or other selected statement claims</td>
@@ -1596,17 +1594,17 @@ Content-Type: application/json
   "immediate_subordinate_entities": [
     {
       "id": "https://rp0.example.net/oidc/rp",
-      "entity_statement": "eyJ0eXAiOiJlbnRpdHktc3RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiQlh2ZnJ..."
+      "subordinate_statement": "eyJ0eXAiOiJlbnRpdHktc3RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiQlh2ZnJ..."
     },
     {
       "id": "https://rp0.example.net/oidc/rp",
-      "entity_statement": "eyH1eZUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
+      "subordinate_statement": "eyH1eZUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
     }
   ]
 }
 </pre><a href="#section-3.2-8" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-9"><em>Figure 5: Example Federation Extended Subordinate Listing endpoint response that includes Entity Statements.</em><a href="#section-3.2-9" class="pilcrow">¶</a></p>
+<p id="section-3.2-9"><em>Figure 5: Example Federation Extended Subordinate Listing endpoint response that includes Subordinate Statements.</em><a href="#section-3.2-9" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.2-10">
 <pre>GET /list_extended?audit_timestamps=true&amp;claims=entity_statement HTTP/1.1
 
@@ -1617,7 +1615,7 @@ Content-Type: application/json
   "immediate_subordinate_entities": [
     {
       "id": "https://rp0.example.net/oidc/rp",
-      "entity_statement": "eyH1eZUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ...",
+      "subordinate_statement": "eyH1eZUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ...",
       "registered":1704217689,
       "updated":1704217789,
       "revoked":1704217800
@@ -1626,9 +1624,9 @@ Content-Type: application/json
 }
 </pre><a href="#section-3.2-10" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-11"><em>Figure 6: Example Federation Extended Subordinate Listing endpoint response that includes an Entity Statement and audit timestamps</em><a href="#section-3.2-11" class="pilcrow">¶</a></p>
+<p id="section-3.2-11"><em>Figure 6: Example Federation Extended Subordinate Listing endpoint response that includes an Subordinate Statement and audit timestamps</em><a href="#section-3.2-11" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.2-12">
-<pre>GET /list_extended?claims=entity_statement,trust_marks HTTP/1.1
+<pre>GET /list_extended?claims=subordinate_statement,trust_marks HTTP/1.1
 
 200 OK
 Content-Type: application/json
@@ -1643,13 +1641,13 @@ Content-Type: application/json
           "trust_mark": "eyJraWQiOiJmdWtDdUtTS3hwWWJjN09lZUk3Ynlya3N5a0E1bDhP..."
         }
       ],
-      "entity_statement": "eyH1eZUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ...",
+      "subordinate_statement": "eyH1eZUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ...",
     }
   ]
 }
 </pre><a href="#section-3.2-12" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-13"><em>Figure 7: Example Federation Extended Subordinate Listing endpoint response that includes Entity Statements and Trust Marks</em><a href="#section-3.2-13" class="pilcrow">¶</a></p>
+<p id="section-3.2-13"><em>Figure 7: Example Federation Extended Subordinate Listing endpoint response that includes Subordinate Statements and Trust Marks</em><a href="#section-3.2-13" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1700,23 +1698,23 @@ Content-Type: application/json
   "immediate_subordinate_entities": [
     {
       "id": "https://0.example.net",
-      "entity_statement": "eyJ0eXAiOiJlbnRpdHktc3RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiQlh2ZnJ..."
+      "subordinate_statement": "eyJ0eXAiOiJlbnRpdHktc3RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiQlh2ZnJ..."
     },
     {
       "id": "https://1.example.net",
-      "entity_statement": "eyH1eZUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
+      "subordinate_statement": "eyH1eZUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
     },
     ...
     {
       "id": "https://999.example.net",
-      "entity_statement": "eyK2aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
+      "subordinate_statement": "eyK2aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
     }
   ],
   "next_entity_id": "https://1000.example.net"
 }
 </pre><a href="#section-5-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5-3"><em>Figure 8: A Trust Anchor returns the results list consisting of thousand Immediate Subordinate Entities, along with the next Entity id that the next page starts with, in response to the request to list all immediate Subordinate Entities.</em><a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-3"><em>Figure 8: A Trust Anchor returns the results list consisting of thousand Immediate Subordinate Entities, along with the next Entity id that the next page starts with, in response to the request to list all Immediate Subordinate Entities.</em><a href="#section-5-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-4">
 <pre>GET /list_extended?from_entity_id=https://1000.example.net HTTP/1.1
 
@@ -1727,15 +1725,15 @@ Content-Type: application/json
   "immediate_subordinate_entities": [
     {
       "id": "https://1000.example.net",
-      "entity_statement": "eyK2aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
+      "subordinate_statement": "eyK2aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
     },
     {
       "id": "https://1001.example.net",
-      "entity_statement": "eyH4aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
+      "subordinate_statement": "eyH4aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
     },
     {
       "id": "https://1003.example.net",
-      "entity_statement": "eyW9aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
+      "subordinate_statement": "eyW9aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
     }
   ]
 }
@@ -1752,14 +1750,14 @@ Content-Type: application/json
   "immediate_subordinate_entities": [
     {
       "id": "https://123.example.net",
-      "entity_statement": "eyJ0eXAiOiJlbnRpdHktc3RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiQlh2ZnJ...",
+      "subordinate_statement": "eyJ0eXAiOiJlbnRpdHktc3RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiQlh2ZnJ...",
       "registered": 1704217689,
       "updated": 1704217789,
       "revoked": 1704217800
     },
     {
       "id": "https://323.example.net",
-      "entity_statement": "eyW9aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ...",
+      "subordinate_statement": "eyW9aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ...",
       "registered": 1704217689,
       "updated": 1704217789,
       "revoked": 1704217800
@@ -1767,7 +1765,7 @@ Content-Type: application/json
     ...
     {
       "id": "https://342.example.net",
-      "entity_statement": "eyK2aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ...",
+      "subordinate_statement": "eyK2aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ...",
       "registered": 1704217689,
       "updated": 1704217789,
       "revoked": 1704217800
