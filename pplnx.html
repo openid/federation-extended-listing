@@ -1222,7 +1222,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect A/B</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-12-09" class="published">9 December 2024</time>
+<time datetime="2024-12-10" class="published">10 December 2024</time>
     </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
@@ -1355,7 +1355,7 @@ li > p:last-of-type:only-child {
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-extended-subordinate-listin" class="section-name selfRef">Extended Subordinate Listing Endpoint</a>
       </h2>
 <p id="section-3-1">The Federation Extended Subordinate Listing endpoint is exposed by Federation Entities acting as a Trust Anchor or Intermediate. The endpoint lists the Immediate Subordinate Entities about which the Trust Anchor or Intermediate issues Subordinate Statements.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">While similar to the <code>federation_list_endpoint</code>, the Extended List Endpoint provides pagination of the result, extensive details about Immediate Subordinate Entities, and flexibility in the definition of custom filters.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-2">While similar to the <code>federation_list_endpoint</code>, the Federation Extended Subordinate Listing Endpoint provides pagination of the result, extensive details about Immediate Subordinate Entities, and flexibility in the definition of custom filters.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <p id="section-3-3">This endpoint is particularly valuable in scenarios where a federation contains one or more Intermediates that manage a large number of Immediate Subordinate Entities. To efficiently handle potentially large datasets, the endpoint incorporates pagination functionality. This allows clients to retrieve the data in manageable chunks.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <p id="section-3-4">By segmenting the data into pages, the endpoint facilitates the efficient transmission and processing of data and also adds to the client's ability to navigate through the information. As pagination enables consumers of this endpoint to retrieve a section of the larger superset of data, some form of ordering on the response MUST be established by the issuing Entity. No recommendation is made on which key the ordering is based upon and is left up to the choice of implementing Entities.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <p id="section-3-5">The selected pagination type offers a mix of consistency and performance characteristics appropriate for the intended use of the endpoint. The size of the dataset does not impact performance. Changes made to previously fetched pages do not affect the overall result consistency, while any changes in pages yet to be fetched will be reflected in the overall result list.<a href="#section-3-5" class="pilcrow">¶</a></p>
