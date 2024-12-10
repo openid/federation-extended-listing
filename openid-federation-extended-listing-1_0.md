@@ -75,7 +75,7 @@ This specification uses the terms "Entity Identifier", "Subordinate Statement", 
 
 The Federation Extended Subordinate Listing endpoint is exposed by Federation Entities acting as a Trust Anchor or Intermediate. The endpoint lists the Immediate Subordinate Entities about which the Trust Anchor or Intermediate issues Subordinate Statements.
 
-While similar to the `federation_list_endpoint`, the Extended List Endpoint provides pagination of the result, extensive details about Immediate Subordinate Entities, and flexibility in the definition of custom filters.
+While similar to the `federation_list_endpoint`, the Federation Extended Subordinate Listing Endpoint provides pagination of the result, extensive details about Immediate Subordinate Entities, and flexibility in the definition of custom filters.
 
 This endpoint is particularly valuable in scenarios where a federation contains one or more Intermediates that manage a large number of Immediate Subordinate Entities. To efficiently handle potentially large datasets, the endpoint incorporates pagination functionality. This allows clients to retrieve the data in manageable chunks.
 
