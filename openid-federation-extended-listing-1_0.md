@@ -378,6 +378,9 @@ We would like to thank the following individuals for their contributions to this
 
 * Corrected section hierarchy for Extended Subordinate Listing Response subsection.
 * Made OpenID Federation reference normative.
+* Renamed ther claim name `entity_statement` to `subordinate_statement` in the response
+* `entity_statement` is not mandatory in the response if not explictly requested
+* Terminology alignments
 * Added Acknowledgements.
 
 -00
