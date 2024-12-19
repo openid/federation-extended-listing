@@ -10,7 +10,7 @@
 <meta content="Łukasz Jaromin" name="author">
 <meta content="Michael B. Jones" name="author">
 <meta content="
-       This specification acts as an extension to the  . It defines methods to interact with a given Federation with a potentially large number of registered Entities, as well as mechanisms to retrieve multiple entity statements along with associated details in a single request. 
+       This specification acts as an extension to the  . It defines methods to interact with a given Federation with a potentially large number of registered Entities, as well as mechanisms to retrieve multiple Subordinate Statements along with associated details in a single request. 
     " name="description">
 <meta content="xml2rfc 3.16.0" name="generator">
 <meta content="security" name="keyword">
@@ -1222,7 +1222,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect A/B</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-12-05" class="published">5 December 2024</time>
+<time datetime="2024-12-19" class="published">19 December 2024</time>
     </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
@@ -1248,7 +1248,7 @@ li > p:last-of-type:only-child {
 <h1 id="title">OpenID Federation Extended Subordinate Listing 1.0 - draft 01</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This specification acts as an extension to the <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>. It defines methods to interact with a given Federation with a potentially large number of registered Entities, as well as mechanisms to retrieve multiple entity statements along with associated details in a single request.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This specification acts as an extension to the <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>. It defines methods to interact with a given Federation with a potentially large number of registered Entities, as well as mechanisms to retrieve multiple Subordinate Statements along with associated details in a single request.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <div id="toc">
 <section id="section-toc.1">
@@ -1314,13 +1314,13 @@ li > p:last-of-type:only-child {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The extending listing endpoint has been created to address two outstanding issues identified in <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">The Federation Extended Subordinate Listing endpoint has been created to address two outstanding issues identified in <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <div id="response-size">
 <section id="section-1.1">
         <h3 id="name-response-size">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-response-size" class="section-name selfRef">Response Size</a>
         </h3>
-<p id="section-1.1-1">The standard <code>federation_list_endpoint</code> has limitations when entities are able to issue entity statements for an exceptionally large number of entities. Limitations can be encountered both when attempting to process receiving such a large response as well as more technical limitations such as response sizes of infrastructure. Pagination has been proposed as a solution for this.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">The standard <code>federation_list_endpoint</code> has limitations when Entities are able to issue Subordinate Statements for an exceptionally large number of Entities. Limitations can be encountered both when attempting to process receiving such a large response as well as more technical limitations such as response sizes of infrastructure. Pagination has been proposed as a solution for this.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="bulk-retrieval">
@@ -1328,7 +1328,7 @@ li > p:last-of-type:only-child {
         <h3 id="name-bulk-retrieval">
 <a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-bulk-retrieval" class="section-name selfRef">Bulk Retrieval</a>
         </h3>
-<p id="section-1.2-1">For certain usecases, such as mass registration, consumers may encounter challenges when attempting to retrieve information on multiple entities. A flow with the standard <code>federation_list_endpoint</code> may involve a request to the list endpoint followed by a series of subsequent requests to retrieve an entity statement for each listed entity resulting in an N+1 operation. The extended listing endpoint seeks to solve this by providing a mechanism to include additional metadata for entities in the provided list.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-1">For certain usecases, such as mass registration, consumers may encounter challenges when attempting to retrieve information on multiple Entities. A flow with the standard <code>federation_list_endpoint</code> may involve a request to the list endpoint followed by a series of subsequent requests to retrieve a Subordinate Statement for each listed Entity resulting in an N+1 operation. The Federation Extended Subordinate Listing endpoint seeks to solve this by providing a mechanism to include additional metadata for Entities in the provided list.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="requirements-notation-and-conventions">
@@ -1354,10 +1354,10 @@ li > p:last-of-type:only-child {
       <h2 id="name-extended-subordinate-listin">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-extended-subordinate-listin" class="section-name selfRef">Extended Subordinate Listing Endpoint</a>
       </h2>
-<p id="section-3-1">The extended subordinate listing endpoint is exposed by Federation Entities acting as a Trust Anchor or Intermediate. The endpoint lists the Immediate Subordinate Entities about which the Trust Anchor or Intermediate issues Subordinate Statements.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">While similar to the <code>federation_list_endpoint</code>, the extended list endpoint provides pagination of the result, extensive details about Immediate Subordinate Entities, and flexibility in the definition of custom filters.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-1">The Federation Extended Subordinate Listing endpoint is exposed by Federation Entities acting as a Trust Anchor or Intermediate. The endpoint lists the Immediate Subordinate Entities about which the Trust Anchor or Intermediate issues Subordinate Statements.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">While similar to the <code>federation_list_endpoint</code>, the Federation Extended Subordinate Listing Endpoint provides pagination of the result, extensive details about Immediate Subordinate Entities, and flexibility in the definition of custom filters.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <p id="section-3-3">This endpoint is particularly valuable in scenarios where a federation contains one or more Intermediates that manage a large number of Immediate Subordinate Entities. To efficiently handle potentially large datasets, the endpoint incorporates pagination functionality. This allows clients to retrieve the data in manageable chunks.<a href="#section-3-3" class="pilcrow">¶</a></p>
-<p id="section-3-4">By segmenting the data into pages, the endpoint facilitates the efficient transmission and processing of data and also adds to the client's ability to navigate through the information. As pagination enables consumers of this endpoint to retrieve a section of the larger superset of data, some form of ordering on the response MUST be established by the issuing entity. No recommendation is made on which key the ordering is based upon and is left up to the choice of implementing entities.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-4">By segmenting the data into pages, the endpoint facilitates the efficient transmission and processing of data and also adds to the client's ability to navigate through the information. As pagination enables consumers of this endpoint to retrieve a section of the larger superset of data, some form of ordering on the response MUST be established by the issuing Entity. No recommendation is made on which key the ordering is based upon and is left up to the choice of implementing Entities.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <p id="section-3-5">The selected pagination type offers a mix of consistency and performance characteristics appropriate for the intended use of the endpoint. The size of the dataset does not impact performance. Changes made to previously fetched pages do not affect the overall result consistency, while any changes in pages yet to be fetched will be reflected in the overall result list.<a href="#section-3-5" class="pilcrow">¶</a></p>
 <p id="section-3-6">The endpoint is accessible via the <code>federation_extended_list_endpoint</code> URL, which is published in the <code>federation_metadata</code>.<a href="#section-3-6" class="pilcrow">¶</a></p>
 <div id="extended-subordinate-listing-request">
@@ -1390,7 +1390,7 @@ li > p:last-of-type:only-child {
               <td class="text-left" rowspan="1" colspan="1">from_entity_id</td>
               <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
               <td class="text-left" rowspan="1" colspan="1">Entity Identifier</td>
-              <td class="text-left" rowspan="1" colspan="1">If this parameter is present, the resulting list MUST be the subset of the overall ordered response starting from the index of the entity referenced with this paramter. The list's size MUST NOT exceed the server's chosen upper limit.<br>
+              <td class="text-left" rowspan="1" colspan="1">If this parameter is present, the resulting list MUST be the subset of the overall ordered response starting from the index of the Entity referenced with this paramter. The list's size MUST NOT exceed the server's chosen upper limit.<br>
                 <br>
 If the Entity Identifier that equals value of this parameter does not exist the HTTP status code 400 is returned and the content type <code>application/json</code> with the error code <code>entity_id_not_found</code>. TBD: Recommend client behavior on error.</td>
             </tr>
@@ -1400,7 +1400,7 @@ If the Entity Identifier that equals value of this parameter does not exist the 
               <td class="text-left" rowspan="1" colspan="1">Positive Integer</td>
               <td class="text-left" rowspan="1" colspan="1">Requested number of results included in the response.<br>
                 <br>
- If this parameter is present, the number of results in the returned list must not be greater than the minimum of the server's upper limit and the value of this parameter.<br>
+ If this parameter is present, the number of results in the returned list MUST NOT be greater than the minimum of the server's upper limit and the value of this parameter.<br>
                 <br>
 If this parameter is not present the server MUST fall back on the upper limit.</td>
             </tr>
@@ -1430,11 +1430,11 @@ When present the <code>registered</code>, <code>updated</code>, <code>revoked</c
               <td class="text-left" rowspan="1" colspan="1">Array</td>
               <td class="text-left" rowspan="1" colspan="2">List of claims to be included in the response for each returned Immediate Subordinate Entity.<br>
                 <br>
- If this parameter is NOT present or it is an empty array, the signed entity statement MUST be the only claim for each Immediate Subordinate Entity<br>
+ If this parameter is NOT present or it is an empty array, the response SHOULD NOT contain any claims for a Subordinate Statement.<br>
                 <br>
-If this parameter is present and it is NOT an empty array each JSON object that represents the Immediate Subordinate Entity MUST include the requested claims for a subordinate entity statement if available.<br>
+If this parameter is present and it is NOT an empty array each JSON object that represents the Immediate Subordinate Entity MUST include the requested claims for a Subordinate Statement if available.<br>
                 <br>
-Entities that expose the extended subordinate listing endpoint MUST support all top level statement claims defined in <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>. TBD: Support of requests for discrete entity metdata attributes.</td>
+Entities that expose the Federation Extended Subordinate Listing endpoint MUST support all top level statement claims defined in <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>. TBD: Support of requests for discrete Entity metadata attributes.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">audit_timestamps</td>
@@ -1446,38 +1446,38 @@ If this parameter absent the audit timestamp attributes mentioned above MUST NOT
                 <br>
 If this parameter is present and set to <code>true</code> the response MUST include the above mentioned audit timestamp attributes for each Immediate Subordinate Entity included in the response.<br>
                 <br>
-If this parameter is present and set to <code>false</code> the response MUST NOT include the above mentioned audit timestamp attributes for each Immediate Subordinate Entity included in the response. even irrespective whether the <code>updated_after</code> and/or <code>updated_before</code> request parameters are pressent.<br>
+If this parameter is present and set to <code>false</code> the response MUST NOT include the above mentioned audit timestamp attributes for each Immediate Subordinate Entity included in the response, even irrespective whether the <code>updated_after</code> and/or <code>updated_before</code> request parameters are present.<br>
                 <br>
               </td>
             </tr>
           </tbody>
         </table>
-<p id="section-3.1-4"><em>Table 1: Additional request parameters accepted by the extended subordinate listing endpoint in addition to the those speficied by the <code>federation_list_endpoint</code></em><a href="#section-3.1-4" class="pilcrow">¶</a></p>
-<p id="section-3.1-5">Below are non-normative examples of an HTTP GET request to the federation extended list endpoint:<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.1-4"><em>Table 1: Additional request parameters accepted by the Federation Extended Subordinate Listing endpoint in addition to the those specified by the <code>federation_list_endpoint</code></em><a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-5">Below are non-normative examples of an HTTP GET request to the Federation Extended Subordinate Listing endpoint:<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.1-6">
 <pre>GET /list_extended HTTP/1.1
 Host: trust-anchor.star-federation.example.net
 </pre><a href="#section-3.1-6" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1-7"><em>Figure 1: Initial request without parameters to list immediate subordinates. Typically an initial request.</em><a href="#section-3.1-7" class="pilcrow">¶</a></p>
+<p id="section-3.1-7"><em>Figure 1: Initial request without parameters to list Immediate Subordinates. Typically an initial request.</em><a href="#section-3.1-7" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.1-8">
 <pre>GET /list_extended?from_entity_id=https://rp0.example.net/oidc/rp HTTP/1.1
 Host: trust-anchor.star-federation.example.net
 </pre><a href="#section-3.1-8" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1-9"><em>Figure 2: Request with <code>from_entity_id</code> parameter to list immediate subordinate contained in a subseqent page.</em><a href="#section-3.1-9" class="pilcrow">¶</a></p>
+<p id="section-3.1-9"><em>Figure 2: Request with <code>from_entity_id</code> parameter to list Immediate Subordinate contained in a subsequent page.</em><a href="#section-3.1-9" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.1-10">
 <pre>GET /list_extended?updated_after=946681201&amp;entity_type=openid_relying_party HTTP/1.1
 Host: trust-anchor.star-federation.example.net
 </pre><a href="#section-3.1-10" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1-11"><em>Figure 3: Request to list entities of a certain type and updated since certain point in time.</em><a href="#section-3.1-11" class="pilcrow">¶</a></p>
+<p id="section-3.1-11"><em>Figure 3: Request to list Entities of a certain type and updated since certain point in time.</em><a href="#section-3.1-11" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.1-12">
 <pre>GET /list_extended?claims=trust_marks HTTP/1.1
 Host: trust-anchor.star-federation.example.net
 </pre><a href="#section-3.1-12" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1-13"><em>Figure 4: Request to list all entities and only include trust marks in the response.</em><a href="#section-3.1-13" class="pilcrow">¶</a></p>
+<p id="section-3.1-13"><em>Figure 4: Request to list all Entities and only include Trust Marks in the response.</em><a href="#section-3.1-13" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="extended-subordinate-listing-response">
@@ -1519,8 +1519,8 @@ Host: trust-anchor.star-federation.example.net
             </tr>
           </tbody>
         </table>
-<p id="section-3.2-3"><em>Table 2: Top-level attributes included in the subordinate JSON object returned in the response body</em><a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2-4">Each JSON object in the returned <code>immediate_subordinate_entities</code> array MAY contain attributes from the sets defined for Entity Statements and Metadata in <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> as well as those defined in the table below.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.2-3"><em>Table 2: Top-level attributes included in the Subordinate Entity JSON object returned in the response body</em><a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-4">Each JSON object in the returned <code>immediate_subordinate_entities</code> array MAY contain attributes from the sets defined for Entity Statements and metadata in <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> as well as those defined in the table below.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <table class="center" id="table-3">
           <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
 <thead>
@@ -1547,20 +1547,18 @@ Host: trust-anchor.star-federation.example.net
               <td class="text-left" rowspan="1" colspan="1">Entity Identifier for the subject entity of the current record.</td>
             </tr>
             <tr>
-              <td class="text-left" rowspan="1" colspan="1">entity_statement</td>
+              <td class="text-left" rowspan="1" colspan="1">subordinate_statement</td>
               <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
               <td class="text-left" rowspan="1" colspan="1">String</td>
-              <td class="text-left" rowspan="1" colspan="1">Signed entity statement for the subordinate entity as issued by the entity that exposes the extended subordinate listing endpoint.<br>
+              <td class="text-left" rowspan="1" colspan="1">Subordinate Statement for the Immediate Subordinate Entity as issued by the Entity that exposes the Federation Extended Subordinate Listing endpoint.<br>
                 <br>
-This <code>entity_statement</code> attribute MUST be returned if the <code>claims</code> parameter is NOT present in the request or it is present but the array is empty.<br>
-                <br>
-This <code>entity_statement</code> attribute MUST NOT be returned if the <code>claims</code> parameter is NOT present in the request or it is present but the array is empty.</td>
+This <code>subordinate_statement</code> attribute MUST be returned if the <code>claims</code> parameter is present and contains <code>subordinate_statement</code>. It MUST NOT be returned if the <code>claims</code> parameter is present but the array does not contain <code>subordinate_statement</code>.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">trust_marks, metadata, and/or other selected statement claims</td>
               <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
               <td class="text-left" rowspan="1" colspan="1">N/A</td>
-              <td class="text-left" rowspan="1" colspan="1">Selected Immediate Subrodianate claims as requested with the <code>claims</code> request attribute. <br>
+              <td class="text-left" rowspan="1" colspan="1">Selected Immediate Subordinate claims as requested with the <code>claims</code> request attribute. <br>
                 <br>
 These attributes MUST NOT be returned if the <code>claims</code> parameter is NOT present in the request or it is present but the array is empty.</td>
             </tr>
@@ -1574,7 +1572,7 @@ These attributes MUST NOT be returned if the <code>claims</code> parameter is NO
               <td class="text-left" rowspan="1" colspan="1">updated</td>
               <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
               <td class="text-left" rowspan="1" colspan="1">Number</td>
-              <td class="text-left" rowspan="1" colspan="1">Time when the Entity was updated using the time format defined for the <code>iat</code> claim in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>. This parameter may indicate that the Federation Entity Keys or metadatapolicies or constraints about this Entity was updated.</td>
+              <td class="text-left" rowspan="1" colspan="1">Time when the Entity was updated using the time format defined for the <code>iat</code> claim in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>. This parameter MAY indicate that the Federation Entity Keys or metadata policies or constraints about this Entity was updated.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">revoked</td>
@@ -1585,7 +1583,7 @@ These attributes MUST NOT be returned if the <code>claims</code> parameter is NO
           </tbody>
         </table>
 <p id="section-3.2-6"><em>Table 3: Structure of the Immediate Entity JSON object in the <code>immediate_subordinate_entities</code> array</em><a href="#section-3.2-6" class="pilcrow">¶</a></p>
-<p id="section-3.2-7">The following are non-normative examples of a JSON response from the Federation Extended List Endpoint:<a href="#section-3.2-7" class="pilcrow">¶</a></p>
+<p id="section-3.2-7">The following are non-normative examples of a JSON response from the Federation Extended Subordinate Listing endpoint:<a href="#section-3.2-7" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.2-8">
 <pre>GET /list_extended HTTP/1.1
 
@@ -1596,17 +1594,17 @@ Content-Type: application/json
   "immediate_subordinate_entities": [
     {
       "id": "https://rp0.example.net/oidc/rp",
-      "entity_statement": "eyJ0eXAiOiJlbnRpdHktc3RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiQlh2ZnJ..."
+      "subordinate_statement": "eyJ0eXAiOiJlbnRpdHktc3RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiQlh2ZnJ..."
     },
     {
       "id": "https://rp0.example.net/oidc/rp",
-      "entity_statement": "eyH1eZUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
+      "subordinate_statement": "eyH1eZUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
     }
   ]
 }
 </pre><a href="#section-3.2-8" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-9"><em>Figure 5: Example extended list endpoint response that includes entity statements.</em><a href="#section-3.2-9" class="pilcrow">¶</a></p>
+<p id="section-3.2-9"><em>Figure 5: Example Federation Extended Subordinate Listing endpoint response that includes Subordinate Statements.</em><a href="#section-3.2-9" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.2-10">
 <pre>GET /list_extended?audit_timestamps=true&amp;claims=entity_statement HTTP/1.1
 
@@ -1617,7 +1615,7 @@ Content-Type: application/json
   "immediate_subordinate_entities": [
     {
       "id": "https://rp0.example.net/oidc/rp",
-      "entity_statement": "eyH1eZUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ...",
+      "subordinate_statement": "eyH1eZUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ...",
       "registered":1704217689,
       "updated":1704217789,
       "revoked":1704217800
@@ -1626,9 +1624,9 @@ Content-Type: application/json
 }
 </pre><a href="#section-3.2-10" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-11"><em>Figure 6: Example extended list endpoint response that includes an entity statement and audit timestampts</em><a href="#section-3.2-11" class="pilcrow">¶</a></p>
+<p id="section-3.2-11"><em>Figure 6: Example Federation Extended Subordinate Listing endpoint response that includes an Subordinate Statement and audit timestamps</em><a href="#section-3.2-11" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.2-12">
-<pre>GET /list_extended?claims=entity_statement,trust_marks HTTP/1.1
+<pre>GET /list_extended?claims=subordinate_statement,trust_marks HTTP/1.1
 
 200 OK
 Content-Type: application/json
@@ -1640,16 +1638,16 @@ Content-Type: application/json
       "trust_marks": [
         {
           "id": "https://www.spid.gov.it/certification/rp",
-          "entity_statement": "eyH1eZUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ...",
           "trust_mark": "eyJraWQiOiJmdWtDdUtTS3hwWWJjN09lZUk3Ynlya3N5a0E1bDhP..."
         }
-      ]
+      ],
+      "subordinate_statement": "eyH1eZUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ...",
     }
   ]
 }
 </pre><a href="#section-3.2-12" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-13"><em>Figure 7: Example extended list endpoint response that includes entity statements and trust marks</em><a href="#section-3.2-13" class="pilcrow">¶</a></p>
+<p id="section-3.2-13"><em>Figure 7: Example Federation Extended Subordinate Listing endpoint response that includes Subordinate Statements and Trust Marks</em><a href="#section-3.2-13" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1659,7 +1657,7 @@ Content-Type: application/json
       <h2 id="name-federation-entity-property">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-federation-entity-property" class="section-name selfRef">Federation Entity Property</a>
       </h2>
-<p id="section-4-1">In order for entities to advertise the new endpoint, a new property has been defined adding to the existing set of Federation Entity Metadata as defined in <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">In order for Entities to advertise the Federation Extended Subordinate Listing, a new property has been defined adding to the existing set of Federation Entity Metadata as defined in <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <table class="center" id="table-4">
         <caption><a href="#table-4" class="selfRef">Table 4</a></caption>
 <thead>
@@ -1679,7 +1677,7 @@ Content-Type: application/json
           <tr>
             <td class="text-left" rowspan="1" colspan="1">federation_extended_list_endpoint</td>
             <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
-            <td class="text-left" rowspan="1" colspan="1">The extended list endpoint as described above. All constraints and restrictions on the listing of this endpoint are identical to that defined for the <code>federation_list_endpoint</code> as defined in OpenID Federation 1.0</td>
+            <td class="text-left" rowspan="1" colspan="1">The Federation Extended Subordinate Listing endpoint as described above. All constraints and restrictions on the listing of this endpoint are identical to that defined for the <code>federation_list_endpoint</code> as defined in OpenID Federation 1.0</td>
           </tr>
         </tbody>
       </table>
@@ -1690,7 +1688,7 @@ Content-Type: application/json
       <h2 id="name-examples">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
       </h2>
-<p id="section-5-1">This section contains non-normative examples that demonstrate how to use the Extended Subordinates Listing Endpoint to retrieve subsets of subordinates.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">This section contains non-normative examples that demonstrate how to use the Federation Extended Subordinate Listing endpoint to retrieve subsets of Subordinates.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-2">
 <pre>GET /list_extended HTTP/1.1
 
@@ -1699,26 +1697,26 @@ Content-Type: application/json
 {
   "immediate_subordinate_entities": [
     {
-      "id": "https://0.example.net/",
-      "entity_statement": "eyJ0eXAiOiJlbnRpdHktc3RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiQlh2ZnJ..."
+      "id": "https://0.example.net",
+      "subordinate_statement": "eyJ0eXAiOiJlbnRpdHktc3RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiQlh2ZnJ..."
     },
     {
-      "id": "https://1.example.net/",
-      "entity_statement": "eyH1eZUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
+      "id": "https://1.example.net",
+      "subordinate_statement": "eyH1eZUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
     },
     ...
     {
-      "id": "https://999.example.net/",
-      "entity_statement": "eyK2aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
+      "id": "https://999.example.net",
+      "subordinate_statement": "eyK2aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
     }
   ],
-  "next_entity_id": "https://1000.example.net/"
+  "next_entity_id": "https://1000.example.net"
 }
 </pre><a href="#section-5-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5-3"><em>Figure 8: A Trust Anchor returns the results list consisting of thousand immediate entities, along with the next entity id that the next page starts with, in response to the request to list all immediate subordinates.</em><a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-3"><em>Figure 8: A Trust Anchor returns the results list consisting of thousand Immediate Subordinate Entities, along with the next Entity id that the next page starts with, in response to the request to list all Immediate Subordinate Entities.</em><a href="#section-5-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-4">
-<pre>GET /list_extended?from_entity_id=https://1000.example.net/ HTTP/1.1
+<pre>GET /list_extended?from_entity_id=https://1000.example.net HTTP/1.1
 
 200 OK
 Content-Type: application/json
@@ -1726,22 +1724,22 @@ Content-Type: application/json
 {
   "immediate_subordinate_entities": [
     {
-      "id": "https://1000.example.net/",
-      "entity_statement": "eyK2aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
+      "id": "https://1000.example.net",
+      "subordinate_statement": "eyK2aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
     },
     {
-      "id": "https://1001.example.net/",
-      "entity_statement": "eyH4aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
+      "id": "https://1001.example.net",
+      "subordinate_statement": "eyH4aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
     },
     {
-      "id": "https://1003.example.net/",
-      "entity_statement": "eyW9aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
+      "id": "https://1003.example.net",
+      "subordinate_statement": "eyW9aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ..."
     }
   ]
 }
 </pre><a href="#section-5-4" class="pilcrow">¶</a>
 </div>
-<p id="section-5-5"><em>Figure 9: A Trust Anchor returns all entities starting from the entity provided as a parameter.</em><a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-5"><em>Figure 9: A Trust Anchor returns all Entities starting from the Entity id provided as a parameter.</em><a href="#section-5-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-6">
 <pre>GET /list_extended?updated_after=946681201&amp;entity_type=openid_relying_party&amp;audit_timestamps=true HTTP/1.1
 
@@ -1751,33 +1749,33 @@ Content-Type: application/json
 {
   "immediate_subordinate_entities": [
     {
-      "id": "https://123.example.net/",
-      "entity_statement": "eyJ0eXAiOiJlbnRpdHktc3RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiQlh2ZnJ...",
+      "id": "https://123.example.net",
+      "subordinate_statement": "eyJ0eXAiOiJlbnRpdHktc3RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiQlh2ZnJ...",
       "registered": 1704217689,
       "updated": 1704217789,
       "revoked": 1704217800
     },
     {
-      "id": "https://323.example.net/",
-      "entity_statement": "eyW9aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ...",
+      "id": "https://323.example.net",
+      "subordinate_statement": "eyW9aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ...",
       "registered": 1704217689,
       "updated": 1704217789,
       "revoked": 1704217800
     },
     ...
     {
-      "id": "https://342.example.net/",
-      "entity_statement": "eyK2aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ...",
+      "id": "https://342.example.net",
+      "subordinate_statement": "eyK2aKUkOgKlbnRpdHktc4RhdGVtZW50K2p3dCIsImFsZyI6IlJTMjU4Iiwia2lkIjoiQlh2ZnJ...",
       "registered": 1704217689,
       "updated": 1704217789,
       "revoked": 1704217800
     }
   ],
-  "next_entity_id": "https://736.example.net/"
+  "next_entity_id": "https://736.example.net"
 }
 </pre><a href="#section-5-6" class="pilcrow">¶</a>
 </div>
-<p id="section-5-7"><em>Figure 10: Get list of immediate subordiates updated after certain moment in time. The response contains more than one page.</em><a href="#section-5-7" class="pilcrow">¶</a></p>
+<p id="section-5-7"><em>Figure 10: Get list of Immediate Subordinates updated after certain moment in time. The response contains more than one page.</em><a href="#section-5-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-6">
@@ -1845,7 +1843,14 @@ Content-Type: application/json
 </li>
         <li class="compact" id="appendix-C-3.2">Made OpenID Federation reference normative.<a href="#appendix-C-3.2" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.3">Added Acknowledgements.<a href="#appendix-C-3.3" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-3.3">Renamed the claim name <code>entity_statement</code> to <code>subordinate_statement</code> in the response.<a href="#appendix-C-3.3" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-3.4">
+          <code>entity_statement</code> is not mandatory in the response if not explictly requested<a href="#appendix-C-3.4" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-3.5">Terminology alignments<a href="#appendix-C-3.5" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-3.6">Added Acknowledgements.<a href="#appendix-C-3.6" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="appendix-C-4">-00<a href="#appendix-C-4" class="pilcrow">¶</a></p>
