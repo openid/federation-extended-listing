@@ -148,6 +148,15 @@ the table below.
 *Table 1: Additional request parameters accepted by the Federation Extended Subordinate Listing endpoint in addition to
 the those specified by the `federation_list_endpoint`*
 
+In addition to the new parameters above, this specification extends the following parameter as defined in the `federation_list_endpoint`:
+
+| **Parameter**    | **Extension** |
+|------------------|---------------|
+| trust_mark_type  | When multiple `trust_mark_type` parameters are present, for example `trust_mark_type=https://example.net/mark1&trust_mark_type=https://example.net/mark2`, the result MUST be filtered to include all Immediate Subordinates for which at least one of the specified Trust Mark type identifiers has been issued and is still valid. All other behavior of this parameter remains as defined in [@!OpenID.Federation]. |
+
+*Table 2: Extensions to existing request parameters defined in the `federation_list_endpoint`*
+
+
 Below are non-normative examples of an HTTP GET request to the Federation Extended Subordinate Listing endpoint:
 
 ```
@@ -188,7 +197,7 @@ JSON object containing the claims specified in the table below.
 | immediate_subordinate_entities | REQUIRED         | Array             | Array of JSON objects, each describing an Immediate Subordinate Entity using the structure defined in the table below                                                                                                                 |
 | next_entity_id                 | OPTIONAL         | Entity Identifier | Entity Identifier for the next element in the result list where the next page begins. This attribute is mandatory when additional results are available beyond those included in the returned `immediate_subordinate_entities` array. |
 
-*Table 2: Top-level attributes included in the Subordinate Entity JSON object returned in the response body*
+*Table 3: Top-level attributes included in the Subordinate Entity JSON object returned in the response body*
 
 Deployments MAY define and use additional claims.
 
@@ -204,7 +213,7 @@ additionally choose to define additional claims that can be returned here.
 | updated                                                       | OPTIONAL         | Number            | Time when the Entity was updated using the time format defined for the `iat` claim in [@!RFC7519]. This parameter MAY indicate that the Federation Entity Keys or metadata policies or constraints about this Entity was updated.                                                                                                                                                                                    |
 | trust_marks, metadata, and/or other selected statement claims | OPTIONAL         | N/A               | Selected Immediate Subordinate claims as requested with the `claims` request attribute.                                                                                                                                                                                                                                                                                                                              |
 
-*Table 3: Structure of the Immediate Entity JSON object in the `immediate_subordinate_entities` array*
+*Table 4: Structure of the Immediate Entity JSON object in the `immediate_subordinate_entities` array*
 
 The following are non-normative examples of a JSON response from the Federation Extended Subordinate Listing endpoint:
 
