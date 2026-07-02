@@ -1,13 +1,14 @@
 %%%
-title = "OpenID Federation Extended Subordinate Listing 1.0 - draft 02"
-abbrev = "openid-federation-extended-listing"
+title = "OpenID Federation Extended Subordinate Listing 1.0 - draft 03"
+abbrev = "Federation Extended Subordinate Listing"
 ipr = "none"
-workgroup = "OpenID Connect A/B"
-keyword = ["security", "openid"]
+workgroup = "OpenID Connect Working Group"
+keyword = ["security", "openid", "federation"]
+consensus = true
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "openid-federation-extended-listing"
+value = "openid-federation-extended-listing-1_0"
 status = "standard"
 
 [[author]]
@@ -47,7 +48,7 @@ uri = "https://self-issued.info/"
 
 .# Abstract
 
-This specification acts as an extension to the [@!OpenID.Federation]. It defines a mechanism to interact with a given
+This specification is an extension to [@!OpenID.Federation]. It defines a mechanism to interact with a
 Federation with a potentially large number of registered Entities, as well as mechanisms to retrieve multiple
 Subordinate Statements along with associated details in a single request.
 
@@ -60,7 +61,7 @@ in [@!OpenID.Federation].
 
 ## Response Size
 
-The `federation_list_endpoint` as defined in [@!OpenID.Federation] has limitations when an Entity has a large number of
+The `federation_list_endpoint`, as defined in [@!OpenID.Federation], has limitations when an Entity has a large number of
 configured Subordinate Entities. In this scenario, practical limitations can be encountered both for consumers
 attempting to process such large response sets and more technical limitations with infrastructure limits when returning
 exceptionally large datasets. This document defines a form of pagination to address this.
@@ -105,7 +106,7 @@ By segmenting the data into pages, the endpoint facilitates the efficient transm
 adds to the client's ability to navigate through the information.
 
 The selected method of pagination offers a mix of consistency and performance characteristics appropriate for the
-intended use of the endpoint. Primarily, the size of the dataset does not impact performance. Additionally any changes
+intended use of the endpoint. Primarily, the size of the dataset does not impact performance. Additionally, any changes
 made to previously retrieved pages do not affect the overall result consistency, while any changes in pages yet to be
 fetched will be reflected in the overall result list.
 
@@ -161,7 +162,7 @@ GET /list_extended HTTP/1.1
 Host: trust-anchor.star-federation.example.net
 ```
 
-*Figure 1: Initial request without parameters to list Immediate Subordinates. Typically an initial request.*
+*Figure 1: Initial request without parameters to list Immediate Subordinates. Typically, an initial request.*
 
 ```
 GET /list_extended?from=k2RgSYvGEM4CWz2O HTTP/1.1
@@ -284,7 +285,7 @@ Trust Marks*
 
 # Federation Entity Property
 
-In order for Entities to advertise the Federation Extended Subordinate Listing, a new property has been defined adding
+For Entities to advertise the Federation Extended Subordinate Listing, a new property is defined adding
 to the existing set of Federation Entity Metadata as defined in [@!OpenID.Federation].
 
 | **Metadata**                      | **Availability** | **Description**                                                                                                                                                                                                                                |
@@ -356,8 +357,8 @@ Content-Type: application/json
 ```
 
 *Figure 8: A Trust Anchor returns the result list consisting of a large number of Immediate Subordinate Entities, along
-with an opaque identifier used to retrieve the next page. This request specified no `limit` however the
-Issuing Entity chose to limit the response size according to it's defined upper limit.*
+with an opaque identifier used to retrieve the next page. This request specified no `limit`, however the
+Issuing Entity chose to limit the response size according to its defined upper limit.*
 
 ```
 GET /list_extended?from=jGCoYZpnXFtaVKgD HTTP/1.1
@@ -449,13 +450,13 @@ apply to this specification.
         <author fullname="Vladimir Dzhuvinov">
             <organization>Connect2id</organization>
         </author>
-        <date day="24" month="October" year="2024"/>
+        <date day="17" month="February" year="2026"/>
     </front>
 </reference>
 
 # Notices
 
-Copyright (c) 2025 The OpenID Foundation.
+Copyright (c) 2026 The OpenID Foundation.
 
 The OpenID Foundation (OIDF) grants to any Contributor, developer,
 implementer, or other interested party a non-exclusive, royalty free,
@@ -504,6 +505,12 @@ Roland Hedberg.
 # Document History
 
 [[ To be removed from the final specification ]]
+
+-03
+
+* Adjusted pagination mechanism to use an opaque token.
+* Support multiple trust mark types in extended subordinate listing request.
+* Added metadata example.
 
 -02
 
