@@ -116,9 +116,6 @@ retrieve a subset of the full dataset, the issuing Entity MUST ensure consistent
 returned responses. No recommendation is made on which key the ordering is based upon and is left up to the choice of
 implementing Entities.
 
-The endpoint is accessible via the `federation_extended_list_endpoint` URL, which is published in the issuing Entity's
-`federation_metadata`.
-
 ### Response Limits
 
 This endpoint defines the `limit` query parameter, allowing consumers to specify a desired maximum number of Entities
