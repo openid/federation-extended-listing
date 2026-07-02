@@ -294,6 +294,40 @@ to the existing set of Federation Entity Metadata as defined in [@!OpenID.Federa
 |-----------------------------------|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | federation_extended_list_endpoint | OPTIONAL         | The Federation Extended Subordinate Listing endpoint as described above. All constraints and restrictions on the listing of this endpoint are identical to that defined for the `federation_list_endpoint` as defined in OpenID Federation 1.0 |
 
+## Endpoint Location
+
+The location of the Federation Extended Subordinate Listing endpoint is published in the `federation_entity` metadata, using the `federation_extended_list_endpoint` parameter.
+
+The following is a non-normative example of an Entity Configuration payload, for a Trust Anchor that includes the `federation_extended_list_endpoint`:
+
+```json
+{
+  "iss": "https://ta.example.org",
+  "sub": "https://ta.example.org",
+  "iat": 1590000000,
+  "exp": 1590086400,
+  "jwks": {
+    "keys": [
+      {
+        "kty": "RSA",
+        "kid": "key1",
+        "use": "sig",
+        "n": "n4EPtAOCc9AlkeQHPzHStgAbgs7bTZLwUBZdR8_KuKPEHLd4rHVTeT",
+        "e": "AQAB"
+      }
+    ]
+  },
+  "metadata": {
+    "federation_entity": {
+      "federation_fetch_endpoint": "https://ta.example.org/fetch",
+      "federation_list_endpoint": "https://ta.example.org/list",
+      "federation_extended_list_endpoint": "https://ta.example.org/list_extended",
+      "federation_resolve_endpoint": "https://ta.example.org/resolve"
+    }
+  }
+}
+```
+
 # Examples
 
 This section contains non-normative examples that demonstrate how to use the Federation Extended Subordinate Listing
